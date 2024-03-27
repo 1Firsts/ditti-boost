@@ -33,6 +33,11 @@ To use Ditti Boost, first navigate to the project directory and run the followin
 ditti-boost
 ```
 
+F12 in Profile Warpcast copy bearer token like this
+```
+MK-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx==
+```
+
 Use only access_token not memonic phrase. Then, you can choose from various follow and unfollow options.
 
 
