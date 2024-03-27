@@ -1,34 +1,28 @@
-# config.py
-import os
+from farcaster import Warpcast
 from dotenv import load_dotenv
+import os
 
-env_path = os.path.join(os.getcwd(), '.env')
-load_dotenv(dotenv_path=env_path)
+class Authenticator:
+    def __init__(self):
+        load_dotenv()  # Load environment variables from .env file
+        self.access_token = os.getenv('ACCESS_TOKEN') or self.prompt_for_credentials()
 
-ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
-MNEMONIC_PHRASE = os.getenv('MNEMONIC_PHRASE')
+    def authenticate(self):
+        if self.access_token:
+            return Warpcast(access_token=self.access_token)
+        else:
+            raise ValueError("Access token is required for authentication.")
 
-def save_credentials_to_env(access_token, mnemonic_phrase):
-    with open(env_path, 'w') as env_file:
-        if access_token:
-            env_file.write(f"ACCESS_TOKEN={access_token}\n")
-        if mnemonic_phrase:
-            env_file.write(f"MNEMONIC_PHRASE={mnemonic_phrase}\n")
+    def save_credentials_to_env(self, access_token):
+        with open('.env', 'w') as env_file:
+            if access_token:
+                env_file.write(f"ACCESS_TOKEN={access_token}\n")
 
-def prompt_for_credentials():
-    if ACCESS_TOKEN is None and MNEMONIC_PHRASE is None:
-        print("Please enter either an access token or a mnemonic phrase.")
-        access_token_input = input("Access token: ")
-        mnemonic_phrase_input = input("Mnemonic phrase: ")
-
-        if not access_token_input.strip() and not mnemonic_phrase_input.strip():
-            print("Error: Both access token and mnemonic phrase are empty.")
+    def prompt_for_credentials(self):
+        access_token_input = input("Please enter an access token: ").strip()
+        if not access_token_input:
+            print("Error: Access token is empty.")
             exit(1)
 
-        access_token = access_token_input.strip() or None
-        mnemonic_phrase = mnemonic_phrase_input.strip() or None
-        save_credentials_to_env(access_token, mnemonic_phrase)
-
-        return access_token, mnemonic_phrase
-    else:
-        return ACCESS_TOKEN, MNEMONIC_PHRASE
+        self.save_credentials_to_env(access_token_input)
+        return access_token_input
