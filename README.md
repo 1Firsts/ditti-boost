@@ -27,18 +27,6 @@ pip install ditti-boost
 ditti-boost
 ```
 
-## Usage
-
-To use Ditti Boost, first navigate to the project directory and run the following command:
-
-```
-poetry env use 3.10
-poetry install
-poetry run python ditti_boost/cli.py
-```
-
-You will be prompted to enter either an access token or a mnemonic phrase. Then, you can choose from various follow and unfollow options.
-
 ## Contributing
 
 Contributions are welcome! If you'd like to help improve Ditti Boost, please feel free to open an issue, submit a pull request, or suggest new features.
