@@ -23,9 +23,18 @@ To install Ditti Boost, run the following command:
 
 ```
 pip install ditti-boost
+```
 
+## Usage
+
+To use Ditti Boost, first navigate to the project directory and run the following command:
+
+```
 ditti-boost
 ```
+
+Use only access_token not memonic phrase. Then, you can choose from various follow and unfollow options.
+
 
 ## Contributing
 
